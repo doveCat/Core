@@ -9,7 +9,7 @@
             "email": "dove@jinzhijun.cn"
         }
     ],
-    "minimum-stability": "0.0.1",
+    "minimum-stability": "dev",
     "require": {
         "guzzlehttp/guzzle": "^6.3"
     },
