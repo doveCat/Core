@@ -1,7 +1,7 @@
 <?php
-namespace Interior\Petty\Util;
+namespace DACore\Util\Auth;
 
-use Interior\Petty\Util\Request as PettyRequest;
+use DACore\Util\Request as DoveRequest;
 
 # 处理请求类型
 class OAuth{
@@ -18,7 +18,7 @@ class OAuth{
         }
         unset($roles['extra']); # 排除额外信息参与签名
         if(empty($request_all)){
-            $request_all = PettyRequest::allParam(); # 无论是post还是get方式提交都可以用$_REQUEST
+            $request_all = DoveRequest::allParam(); # 无论是post还是get方式提交都可以用$_REQUEST
         }
         $timestamp = intval($request_all['timestamp']/1000);  # 使用秒级时间戳，传递时为毫秒时间戳
         unset($request_all['sign'],$request_all['timestamp']); # 去掉校验本身,时间戳
@@ -73,8 +73,8 @@ class OAuth{
      */
     public static function getAuthTokenKey(){
 
-        PettyRequest::initialize();
-        $access_token_key = PettyRequest::getHeader("mbcore-access-token");
+        DoveRequest::initialize();
+        $access_token_key = DoveRequest::getHeader("mbcore-access-token");
         PettyLog("access_token_key:::".$access_token_key);
         $access_token_val = \PettyRedisAuth::get('oauth_access_token:' . $access_token_key);
         PettyLog("access_token_val:::".json_encode($access_token_val));
